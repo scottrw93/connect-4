@@ -1,4 +1,4 @@
-package connect4;
+package com.ucd.ai.puzzles.connect4;
 //Scott Williams 11356176
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package connect4;
+package com.ucd.ai.puzzles.connect4;
 //Scott Williams 11356176
 
 
@@ -22,10 +22,7 @@ public class AlphaBeta {
 	private static int search_help(Board board, int depth, int achievable, int hope, boolean killer, boolean verbose){
 		if(depth==0 || board.isTerminal()){
 			int val = board.staticEvaluation();
-			if(verbose){
-				System.out.println("Leaf Node, Static eval = "+val+"\tAlpha = "+achievable+"Beata = "+hope);
-				System.out.println("Returning by Static Evaluation");
-			}
+			
 			staticEvals++;
 			return val;
 		}
@@ -37,11 +34,6 @@ public class AlphaBeta {
 			board.makeMove(posMove);
 			int temp = -AlphaBeta.search_help(board, depth-1, -hope, -achievable, killer, verbose);
 			board.undo();
-			
-			if(verbose){
-				System.out.println("Depth = "+depth+" Search eval = "+temp+"\tAlpha = "
-						+achievable+"Beata = "+hope);
-			}
 
 			if(temp>=hope){
 				if(depth==orgDepth)
@@ -49,11 +41,6 @@ public class AlphaBeta {
 				
 				if(killer) 
 					updateKiller(depth, posMove);
-				
-				if(verbose){
-					System.out.println("Returning by Search Evaluation");
-					System.out.println("Making a cut");
-				}
 
 				return temp;
 			}
@@ -63,10 +50,6 @@ public class AlphaBeta {
 					bestMove = posMove;
 				achievable = temp;
 			}
-		}
-
-		if(verbose){
-			System.out.println("Returning by Search Evaluation");
 		}
 		return achievable;
 	}
